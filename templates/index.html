@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackhole Downloader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a; /* Dark background color */
+            color: #ffffff; /* Light text color */
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333333; /* Dark form background color */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        textarea, select, input[type="submit"] {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #555555; /* Darker border color */
+            border-radius: 3px;
+            font-size: 14px;
+            background-color: #1a1a1a; /* Dark input background color */
+            color: #ffffff; /* Light input text color */
+        }
+        select {
+            height: 40px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .message {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #333333; /* Dark form background color */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .error {
+            color: #ff5555; /* Red error message color */
+        }
+        .ok {
+            color: #55ff55; /* Green success message color */
+        }
+    </style>
+</head>
+<body>
+    <h1>Send to Blackhole</h1>
+    <form method="post">
+        <textarea name="magnet" rows="5" placeholder="Enter magnet link"></textarea>
+        <br>
+        <select name="filepath">
+            <option value="sonarr/">Sonarr</option>
+            <option value="sonarr4k/">Sonarr 4K</option>
+            <option value="radarr/">Radarr</option>
+            <option value="radarr4k/">Radarr 4K</option>
+        </select>
+        <br><br>
+        <input type="submit" value="Create Magnet File">
+    </form>
+    <br>
+    {% if error_message %}
+        <p class="error message">{{ error_message }}</p>
+    {% endif %}
+    {% if ok_message %}
+        <p class="ok message">{{ ok_message }}</p>
+    {% endif %}
+</body>
+</html>
