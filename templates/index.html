@@ -70,7 +70,7 @@
 <body>
     <h1>Send to Blackhole</h1>
     <form method="post">
-        <textarea name="magnet" rows="5" placeholder="Enter magnet link"></textarea>
+        <textarea name="magnet" rows="5" placeholder="Enter magnet links (one per line)"></textarea>
         <br>
         <select name="filepath">
             <option value="sonarr/">Sonarr</option>
@@ -82,11 +82,11 @@
         <input type="submit" value="Create Magnet File">
     </form>
     <br>
-    {% if error_message %}
-        <p class="error message">{{ error_message }}</p>
-    {% endif %}
-    {% if ok_message %}
-        <p class="ok message">{{ ok_message }}</p>
-    {% endif %}
+    {% for error in error_messages %}
+        <div class="message error">{{ error }}</div><br>
+    {% endfor %}
+    {% for success in success_messages %}
+        <div class="message ok">{{ success }}</div><br>
+    {% endfor %}
 </body>
 </html>
