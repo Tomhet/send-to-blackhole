@@ -6,7 +6,7 @@ import re
 
 regex = r'urn:btih:(?P<hash>[a-fA-F0-9]{40})(?:&.*dn=(?P<name>[^&]+))?'
 regex_btdig = r'(?<=<title>)(?P<name>[^\s]*)(?= torrent)'
-base_url = 'https://btdig.com/search?q='
+btdig_url = 'https://btdig.com/search?q='
 
 app = Flask(__name__)
 
@@ -34,8 +34,9 @@ def index():
             # if no dn in magnet link fall back to scraping btdig
             if not matches.group('name'):
                 print('falling back to btdig')
-                page = requests.get(base_url + magnet)
-                matches = re.search(regex_btdig, page.text)
+                page = requests.get(btdig_url + magnet)
+                if page.status_code == 200:
+                    matches = re.search(regex_btdig, page.text)
 
             # if no name in btdig fall back to using hash as name
             if not matches.group('name'):
