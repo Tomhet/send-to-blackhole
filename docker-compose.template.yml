@@ -1,11 +1,13 @@
 # docker-compose.yml
-version: '3'
 services:
   flask-app:
+    container_name: send-to-blackhole
     build:
       context: .
       dockerfile: Dockerfile
+    user: "99:100"
+    restart: unless-stopped
     ports:
       - "5000:5000"
     volumes:
-      - ./symlinks:/app/symlinks
+      - /mnt/user/data/torrent/zurg-symlinks:/app/symlinks
