@@ -1,11 +1,11 @@
-# main.py
+# app.py
 from flask import Flask, render_template, request
 from urllib.parse import unquote
 import requests
 import re
 
 regex = r'urn:btih:(?P<hash>[a-fA-F0-9]{40})(?:&.*dn=(?P<name>[^&]+))?'
-regex_btdig = r'(?<=<title>)(?P<name>[^\s]*)(?= torrent)'
+regex_btdig = r'(?<=<title>)(?P<name>.*?)(?= torrent</title>)'
 btdig_url = 'https://btdig.com/search?q='
 
 app = Flask(__name__)
