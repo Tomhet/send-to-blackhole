@@ -4,7 +4,7 @@ from urllib.parse import unquote
 import requests
 import re
 
-regex = r'urn:btih:(?P<hash>[a-fA-F0-9]{40})(?:&.*dn=(?P<name>[^&]+))?'
+regex = r'urn:btih:(?P<hash>[a-fA-F0-9]{40}|[a-zA-Z0-9]{32})(?:&.*dn=(?P<name>[^&]+))?'
 regex_btdig = r'(?<=<title>)(?P<name>.*?)(?= torrent</title>)'
 btdig_url = 'https://btdig.com/search?q='
 
