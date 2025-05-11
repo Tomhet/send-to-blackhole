@@ -46,9 +46,19 @@ def index():
                 # If no dn in magnet link fall back to scraping btdig
                 if not matches.group('name'):
                     print('falling back to btdig')
-                    page = requests.get(btdig_url + magnet)
-                    if page.status_code == 200:
-                        matches = re.search(regex_btdig, page.text)
+                    response = requests.get(btdig_url + magnet)
+                    if response.status_code == 429: # flaresoverr
+                        print('btdig rate limited, using local proxy')
+                        url = "http://192.168.1.20:8191/v1"
+                        headers = {"Content-Type": "application/json"}
+                        data = {
+                            "cmd": "request.get",
+                            "url": btdig_url + magnet,
+                            "maxTimeout": 10000
+                        }
+                        response = requests.post(url, headers=headers, json=data)
+                    if response.status_code == 200:
+                        matches = re.search(regex_btdig, response.text)
 
                 # If no name in btdig fall back to using hash as name
                 if not matches.group('name'):
